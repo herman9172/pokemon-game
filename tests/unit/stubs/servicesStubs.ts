@@ -114,7 +114,6 @@ export const servicesStub: IServices = {
   sqsRepository: sqsRepositoryStub,
   merchantRepository: merchantRepositoryStub,
   superappRepository: superappRepositoryStub,
-  agentsRepository: agentsRepositoryStub,
   userIdentityRepository,
   // authenticationRepository: authenticationRepositoryStub,
 };

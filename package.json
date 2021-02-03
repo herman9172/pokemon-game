@@ -10,7 +10,7 @@
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "local": "npm run aws-login && sls offline start -v --stage local --region us-east-1 --port 8201",
     "setup": "./scripts/setup.sh && npm install",
-    "test": "jest --coverage --detectOpenHandles -c jest.config.js --colors --maxWorkers=4"
+    "test": "jest --no-watchman --coverage --detectOpenHandles -c jest.config.js --colors --maxWorkers=4"
   },
   "author": "OMN1",
   "license": "ISC",
@@ -95,8 +95,7 @@
     "parserPreset": {
       "parserOpts": {
         "issuePrefixes": [
-          "SUP-",
-          "TBN-"
+          "###-"
         ]
       }
     }
