@@ -1,9 +1,9 @@
-
 export interface ILogRepository {
   info(logEntity: ILog): void;
   error(logEntity: ILog): void;
   warn(logEntity: ILog): void;
   debug(logEntity: ILog): void;
+  getInstance?(requestId: string): ILogRepository;
 }
 
 export interface ILog {

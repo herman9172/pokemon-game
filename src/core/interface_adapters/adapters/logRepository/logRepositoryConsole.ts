@@ -7,10 +7,19 @@ import {
 import { createLogger, format, Logger, LoggerOptions, transports } from 'winston';
 
 export class LogRepositoryConsole implements ILogRepository {
+  private static instance: LogRepositoryConsole;
   private readonly logger: Logger;
 
   constructor(private readonly requestId: string) {
     this.logger = this.create();
+  }
+
+  public static getInstance(requestId: string): ILogRepository {
+    if (!LogRepositoryConsole.instance) {
+      LogRepositoryConsole.instance = new LogRepositoryConsole(requestId);
+    }
+
+    return LogRepositoryConsole.instance;
   }
 
   info(logEntity: ILog): void {

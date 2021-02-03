@@ -60,9 +60,8 @@ export class App {
 
   constructor(event?: APIGatewayProxyEvent, lambdaContext?: Context) {
     this._request = new TransformApiGatewayRequest(event, lambdaContext).getRequest();
-    const logRepository = new LogRepositoryConsole(this._request.traceId);
-    const requestRepository = new RequestRepository(this.request, logRepository);
-    const userIdentityRepository = new UserIdentityRepository(logRepository);
+    const requestRepository = new RequestRepository(this.request, this.logRepository);
+    const userIdentityRepository = new UserIdentityRepository(this.logRepository);
     const dbBackofficeRepository = CoreDbRepositoryInMysql.fromConnectionOptions({
       host: env.DB_HOST,
       port: +env.DB_PORT,
@@ -72,24 +71,28 @@ export class App {
     });
 
     this._services = {
-      logRepository,
+      logRepository: this.logRepository,
       dbBackofficeRepository,
       requestRepository,
       userIdentityRepository,
       requestValidator: new RequestValidator(),
-      invokeRepository: new InvokeRepository(logRepository),
-      secretsRepository: new SecretsManagerRepository(logRepository),
-      requestErrorHandler: new RequestErrorHandler(logRepository),
-      emailRepository: new EmailRepositoryMandrill(logRepository),
-      superappRepository: new SuperappRepository(requestRepository, logRepository),
-      usersRepository: new UsersRepository(dbBackofficeRepository, logRepository),
-      merchantRepository: new MerchantsRepository(requestRepository, logRepository),
-      sqsRepository: new SqsRepository(logRepository),
+      invokeRepository: new InvokeRepository(this.logRepository),
+      secretsRepository: new SecretsManagerRepository(this.logRepository),
+      requestErrorHandler: new RequestErrorHandler(this.logRepository),
+      emailRepository: new EmailRepositoryMandrill(this.logRepository),
+      superappRepository: new SuperappRepository(requestRepository, this.logRepository),
+      usersRepository: new UsersRepository(dbBackofficeRepository, this.logRepository),
+      merchantRepository: new MerchantsRepository(requestRepository, this.logRepository),
+      sqsRepository: new SqsRepository(this.logRepository),
     };
   }
 
   get request(): IRequest {
     return this._request;
+  }
+
+  get logRepository(): ILogRepository {
+    return LogRepositoryConsole.getInstance(this._request.traceId);
   }
 
   get services(): IServices {
