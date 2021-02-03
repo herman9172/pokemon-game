@@ -1,0 +1,32 @@
+/**
+ * Environment variables
+ */
+export const env = {
+  STAGE: process.env.STAGE,
+  IS_LOCAL_DEV: process.env.IS_LOCAL_DEV,
+  REGION: process.env.REGION,
+  OMNIPAY_SERVICE_URL: process.env.OMNIPAY_SERVICE_URL,
+  SUPERAPP_SERVICE_URL: process.env.SUPERAPP_SERVICE_URL,
+  MERCHANTS_QR_GENERATOR_QUEUE_NAME: process.env.MERCHANTS_QR_GENERATOR_QUEUE_NAME,
+
+  REDIS_URI: process.env.REDIS_URI,
+
+  // DB
+  DB_HOST: process.env.DB_HOST,
+  DB_PORT: process.env.DB_PORT,
+  DB_SCHEMA: process.env.DB_SCHEMA,
+  DB_USER: process.env.DB_USER,
+  DB_PASSWORD: process.env.DB_PASSWORD,
+
+  OMNIPAY_AUTH_URL: process.env.OMNIPAY_AUTH_URL,
+  OMNIPAY_CLIENT_ID: process.env.OMNIPAY_CLIENT_ID,
+  OMNIPAY_SECRET_KEY: process.env.OMNIPAY_SECRET_KEY,
+  OMNIPAY_ENDPOINT: process.env.OMNIPAY_ENDPOINT,
+  OMNIPAY_SCOPE: process.env.OMNIPAY_SCOPE,
+
+  COGNITO_POOL_ID: process.env.COGNITO_POOL_ID,
+  COGNITO_POOL_CLIENT_ID: process.env.COGNITO_POOL_CLIENT_ID,
+
+  COUNTRYCODE: process.env.COUNTRYCODE,
+  EXTCOUNTRYCODE: process.env.EXTCOUNTRYCODE,
+};

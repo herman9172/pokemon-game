@@ -1,0 +1,27 @@
+# Local API Gateway Routes definition
+# These routes are only used during local development
+# CORS and authorizers are NOT required
+
+# region USERS
+
+- http:
+    path: /users
+    method: post
+    # POST /users
+
+- http:
+    path: /users/{email}
+    method: put
+    # PUT /users
+
+- http:
+    path: /users/{email}
+    method: get
+    # GET /users
+
+- http:
+    path: /users/{email}/resend
+    method: post
+    # POST /users/resend
+# endregion USERS
+

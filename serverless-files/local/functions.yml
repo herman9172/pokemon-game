@@ -1,0 +1,4 @@
+functions:
+  core:
+    handler: src/handlers/appRouter.router
+    events: ${file(src/lib/framework_drivers/routes/serverless/routes-local.yml)}

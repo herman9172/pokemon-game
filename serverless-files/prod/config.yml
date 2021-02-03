@@ -1,0 +1,52 @@
+webpackConfig: ./webpack/webpack.prod.js
+
+environment:
+  STAGE: prod
+  REGION: ${opt:region, self:provider.region}
+  NODE_ENV: 'production'
+
+  # DATABASE
+  DB_HOST: dev-backoffice-db.cecvssvzpdup.us-east-1.rds.amazonaws.com
+  DB_PORT: 3306
+  DB_SCHEMA: backoffice_db_uat
+  DB_USER: backoffice_db_user_uat
+  DB_PASSWORD: 4yaAE4QD3xyMwSMr
+
+  # PROVIDERS
+  OMNIPAY_SERVICE_URL: https://pay.omni.cr
+  SUPERAPP_SERVICE_URL: https://api.superapphub.net
+
+  # SQS
+  MERCHANTS_QR_GENERATOR_QUEUE_NAME: sqs-merchants-qr-generator-${opt:stage, self:provider.stage}
+
+  # Cognito agents pool
+  COGNITO_POOL_ID: us-east-1_lIGy2JA1g
+
+ProviderARNs:
+  AGENTS_POOL: arn:aws:cognito-idp:us-east-1:576731034365:userpool/us-east-1_lIGy2JA1g
+
+vpc:
+  securityGroupIds:
+    - sg-0e1a50fe2a6576c81
+
+  subnetIds:
+    - subnet-0c61d1c0801f42b13
+    - subnet-017ff3d1b32535730
+    - subnet-0d811f094d322f726
+
+customDomain:
+  domainName: api-qr-merchants.superbackoffice.com
+  basePath: ''
+  stage: ${opt:stage, self:provider.stage}
+  createRoute53Record: false
+
+resourcePolicy:
+  - Effect: Allow
+    Principal: '*'
+    Action: execute-api:Invoke
+    Resource:
+      - execute-api:/*/*/*
+    Condition:
+      IpAddress:
+        aws:SourceIp:
+          - '0.0.0.0/0'

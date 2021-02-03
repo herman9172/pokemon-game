@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "rootDir": ".",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "baseUrl": "./",
+    "typeRoots": ["node_modules/@types"],
+    "paths": {
+      "@config/*": ["src/config/*"],
+      "@core/*": ["src/core/*"],
+      "@handlers/*": ["src/handlers/*"],
+      "@lib/*": ["src/lib/*"],
+      "@tests/*": ["tests/unit/*"]
+    },
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "include": ["./src/**/*", "./tests/**/*", "scripts/decrypt.ts", "scripts/encrypt.ts"],
+  "exclude": ["node_modules/**/*", ".serverless/**/*", ".webpack/**/*", "_warmup/**/*", ".vscode/**/*"]
+}

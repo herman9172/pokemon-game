@@ -1,0 +1,34 @@
+# API Gateway Routes definition
+# These routes are deployed to all AWS stages
+# CORS and cognitoAuthorizer are required
+
+# region USERS
+
+- http:
+    path: /users
+    method: post
+    cors: ${self:custom.cors}
+    authorizer: ${self:custom.cognitoAuthorizer}
+    # POST /users
+
+- http:
+    path: /users/{email}
+    method: put
+    cors: ${self:custom.cors}
+    authorizer: ${self:custom.cognitoAuthorizer}
+    # PUT /users
+
+- http:
+    path: /users/{email}
+    method: get
+    cors: ${self:custom.cors}
+    authorizer: ${self:custom.cognitoAuthorizer}
+    # GET /users
+
+- http:
+    path: /users/{email}/resend
+    method: post
+    cors: ${self:custom.cors}
+    authorizer: ${self:custom.cognitoAuthorizer}
+    # POST /resendUserTemporaryPassword
+# endregion USERS

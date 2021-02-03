@@ -1,0 +1,140 @@
+service:
+  name: backend-starter
+
+provider:
+  name: aws
+  runtime: nodejs${env:NODE_VERSION, '12' }.x
+  region: ${env:AWS_REGION, 'us-east-1'}
+  #  tracing: true # X-Ray tracing - Enable if necessary (install plugin in npm)
+  timeout: 30
+  apiGateway:
+    minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
+    binaryMediaTypes:
+      - '*/*'
+  environment: ${file(${self:custom.config}):environment}
+  vpc: ${file(${self:custom.config}):vpc}
+  resourcePolicy: ${file(${self:custom.config}):resourcePolicy}
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'lambda:InvokeFunction'
+        - 'lambda:InvokeAsync'
+        - 'xray:PutTraceSegments'
+        - 'xray:PutTelemetryRecords'
+        - 'sqs:*'
+        - 's3:*'
+      Resource: '*'
+    - Effect: 'Allow'
+      Action:
+        - 'ssm:GetParameters'
+      Resource: 'arn:aws:ssm:#{AWS::Region}:#{AWS::AccountId}:parameter/${self:custom.fullName}/*'
+    - Effect: 'Allow'
+      Action:
+        - 'secretsmanager:GetSecretValue'
+      Resource: 'arn:aws:secretsmanager:#{AWS::Region}:#{AWS::AccountId}:secret:*'
+
+functions: ${file(${self:custom.functions}):functions}
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  config: serverless-files/${self:custom.stage}/config.yml
+  functions: serverless-files/${self:custom.stage}/functions.yml
+  fullName: ${self:service}-${self:custom.stage}
+  cors:
+    origin: '*'
+    headers:
+      - Content-Type
+      - X-Amz-Date
+      - Authorization
+      - X-Api-Key
+      - X-Amz-Security-Token
+      - X-Amz-User-Agent
+      - Access-Token
+    allowCredentials: false
+  cognitoAuthorizer:
+    type: COGNITO_USER_POOLS
+    authorizerId:
+      Ref: ApiGatewayAuthorizer
+  localAuthorizer:
+    name: authorizerLocalUser
+    type: TOKEN
+    identitySource: method.request.header.Authorization
+    identityValidationExpression: Bearer (.*)
+
+  # PLUGINS
+
+  # serverless-api-gateway-caching
+  apiGatewayCaching:
+    enabled: true
+    clusterSize: '0.5' # defaults to '0.5'
+    ttlInSeconds: 300 # maximum allowed: 3600
+    dataEncrypted: false # defaults to false
+    perKeyInvalidation:
+      requireAuthorization: true # default is true
+      handleUnauthorizedRequests: IgnoreWithWarning # default is "IgnoreWithWarning"
+
+  # serverless-api-gateway-throttling
+  apiGatewayThrottling:
+    maxRequestsPerSecond: 10000
+    maxConcurrentRequests: 5000
+
+  # serverless-domain-manager
+  customDomain: ${file(${self:custom.config}):customDomain}
+
+  # serverless-prune-plugin
+  prune:
+    automatic: true
+    number: 5
+
+  # serverless-plugin-split-stacks
+  # This is throwing error on build
+  # `The CloudFormation template is invalid: Unresolved resource dependencies [ApiGatewayRestApi] in the Outputs block of the template`
+  # This error is related with this plugin based on https://github.com/deliveryhero/serverless-aws-documentation/issues/62
+  splitStacks:
+    perFunction: true
+    perType: false
+    perGroupFunction: false
+    stackConcurrency: 5
+    resourceConcurrency: 10
+
+  # serverless-plugin-warmup # Enable if necessary (install plugin in npm)
+  #  warmup:
+  #    schedule: 'rate(10 minutes)'
+  #    timeout: 20
+  #    prewarm: true
+
+  # serverless-webpack
+  webpack:
+    webpackConfig: ${file(${self:custom.config}):webpackConfig}
+    includeModules: true
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+  - serverless-domain-manager
+  - serverless-api-gateway-throttling
+  - serverless-api-gateway-caching
+  # - serverless-plugin-split-stacks - Disable because of an error during deployment
+  # - serverless-plugin-tracing # Enable if necessary (install plugin in npm)
+  # - serverless-plugin-warmup # Enable if necessary (install plugin in npm)
+  - serverless-prune-plugin
+  - serverless-pseudo-parameters
+
+resources:
+  Resources:
+    ApiGatewayAuthorizer:
+      Type: AWS::ApiGateway::Authorizer
+      Properties:
+        AuthorizerResultTtlInSeconds: 300
+        IdentitySource: method.request.header.Authorization
+        Name: Cognito
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        Type: COGNITO_USER_POOLS
+        ProviderARNs:
+          - ${file(${self:custom.config}):ProviderARNs.AGENTS_POOL}
+
+package:
+  exclude:
+    - node_modules/**/aws-sdk/**
+    - node_modules/**/aws-lambda/**

@@ -1,0 +1,62 @@
+webpackConfig: ./webpack/webpack.dev.js
+
+environment:
+  STAGE: ${opt:stage, self:provider.stage}
+  REGION: ${opt:region, self:provider.region}
+  NODE_ENV: 'development'
+
+  # DATABASE
+  DB_HOST: dev-backoffice-db.cecvssvzpdup.us-east-1.rds.amazonaws.com
+  DB_PORT: 3306
+  DB_SCHEMA: backoffice_db_uat
+  DB_USER: backoffice_db_user_uat
+  DB_PASSWORD: 4yaAE4QD3xyMwSMr
+
+  # OMNIPAY
+  OMNIPAY_ENDPOINT: '  https://uat-pay.omni.cr'
+  OMNIPAY_AUTH_URL: 'https://uat-auth-pay.omni.cr/oauth2/token'
+  OMNIPAY_CLIENT_ID: '2sr9u0sv4dsspcj4a2d6bqgj6u'
+  OMNIPAY_SECRET_KEY: ''
+  OMNIPAY_SCOPE: 'https://pay.omni.cr/card-wallet.read'
+
+  # Redis
+  REDIS_URI: ${ssm:smps-${opt:stage, self:provider.stage}-redis}
+
+  # PROVIDERS
+  OMNIPAY_SERVICE_URL: https://uat-pay.omni.cr
+  SUPERAPP_SERVICE_URL: https://uat-api.superapphub.com
+
+  # SQS
+  MERCHANTS_QR_GENERATOR_QUEUE_NAME: sqs-merchants-qr-generator-${opt:stage, self:provider.stage}
+
+  # Cognito agents pool
+  COGNITO_POOL_ID: us-east-1_gi4u7jaN8
+
+ProviderARNs:
+  AGENTS_POOL: arn:aws:cognito-idp:us-east-1:863348442394:userpool/us-east-1_gi4u7jaN8
+
+vpc:
+  securityGroupIds:
+    - sg-0789f99a7fb16f151
+
+  subnetIds:
+    - subnet-00ce4ca7c2f9a1884
+    - subnet-02d485bc77c8c3178
+    - subnet-050dc8fffbb6ae0d6
+
+customDomain:
+  domainName: uat-api-qr-merchants.superbackoffice.com
+  basePath: ''
+  stage: ${opt:stage, self:provider.stage}
+  createRoute53Record: true
+
+resourcePolicy:
+  - Effect: Allow
+    Principal: '*'
+    Action: execute-api:Invoke
+    Resource:
+      - execute-api:/*/*/*
+    Condition:
+      IpAddress:
+        aws:SourceIp:
+          - '0.0.0.0/0'
