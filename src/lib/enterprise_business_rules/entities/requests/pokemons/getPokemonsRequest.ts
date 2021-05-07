@@ -1,11 +1,13 @@
 import { IGetPokemonsRequest } from '@lib/enterprise_business_rules/api_contract/pokemons/iGetPokemonsRequest';
-import { IsString } from 'class-validator';
+import { IsNumberString, IsDefined, IsOptional } from 'class-validator';
 
 export class GetPokemonsRequest {
-  @IsString()
+  @IsDefined()
+  @IsNumberString()
   protected readonly limit: string;
 
-  @IsString()
+  @IsOptional()
+  @IsNumberString()
   protected readonly offset: string;
 
   constructor(request: IGetPokemonsRequest) {
