@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { IResponse } from '@core/enterprise_business_rules/api_contract';
 import { CoreErrorCodes, HttpMethod } from '@core/enterprise_business_rules/constants';
 import { ServerError } from '@core/enterprise_business_rules/entities/errors';

@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { env } from '@config/env';
 
 const lambdaStage = `backend-starter-${env.STAGE === 'local' ? 'dev' : env.STAGE}`;

@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { env } from '@config/env';
 import { TransformApiGatewayRequest } from '@core/application_business_rules/use_cases/transformApiGatewayRequest';
 import { IRequest } from '@core/enterprise_business_rules/api_contract';

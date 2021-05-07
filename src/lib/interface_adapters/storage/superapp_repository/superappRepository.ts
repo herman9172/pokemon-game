@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { env } from '@config/env';
 import { ILogRepository, IRequestRepository } from '@core/interface_adapters/adapters';
 import { ISuperappRepository } from '@lib/interface_adapters/storage/superapp_repository/iSuperappRepository';

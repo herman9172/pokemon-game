@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { IDbRepository } from '@core/interface_adapters/adapters';
 import { ILogRepository } from '@core/interface_adapters/adapters/logRepository/iLogRepository';
 import { IUser } from '@lib/enterprise_business_rules/api_contract/users/iUser';

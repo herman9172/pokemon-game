@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { HttpStatusCode } from '@core/enterprise_business_rules/constants/';
 import {
   BaseError,

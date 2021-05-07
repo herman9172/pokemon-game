@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { IBankAccount } from '@lib/enterprise_business_rules/api_contract/bank_accounts';
 import { IEconomicActivity } from '@lib/enterprise_business_rules/api_contract/economic_activities';
 import {

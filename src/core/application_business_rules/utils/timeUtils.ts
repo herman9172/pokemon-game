@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 export class TimeUtils {
   /**
    * Sleep for a certain amount of time

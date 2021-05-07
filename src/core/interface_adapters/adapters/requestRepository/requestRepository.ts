@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { axiosCore } from '@config/axiosCore';
 import { IRequest } from '@core/enterprise_business_rules/api_contract';
 import { HttpMethod } from '@core/enterprise_business_rules/constants';

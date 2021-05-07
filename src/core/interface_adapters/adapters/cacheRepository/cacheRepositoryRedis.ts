@@ -1,3 +1,4 @@
+// istanbul ignore file
 
 import { env } from '@config/env';
 import { ICacheRepository, ILogRepository } from '@core/interface_adapters/adapters';

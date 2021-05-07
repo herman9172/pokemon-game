@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { ILogRepository } from '@core/interface_adapters/adapters';
 import { generate, Options } from 'generate-password';
 

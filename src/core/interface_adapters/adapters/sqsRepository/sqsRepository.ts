@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { env } from '@config/env';
 import { IChangeSQSVisibilityTimeoutRequest } from '@core/enterprise_business_rules/api_contract/iChangeSQSVisibilityTimeoutRequest';
 import { IDeleteSQSMessageRequest } from '@core/enterprise_business_rules/api_contract/iDeleteSQSMessageRequest';

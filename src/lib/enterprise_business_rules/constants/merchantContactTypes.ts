@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 export enum merchantContactTypes {
   DEPENDANT = 0,
   CONTACT_AGENT = 1,

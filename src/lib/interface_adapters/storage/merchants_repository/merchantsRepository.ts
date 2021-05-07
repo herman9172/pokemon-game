@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { env } from '@config/env';
 import { ILogRepository, IRequestRepository } from '@core/interface_adapters/adapters';
 import { IPaginatedResponse } from '@lib/enterprise_business_rules/api_contract/iPaginatedResponse';
@@ -15,7 +17,7 @@ export class MerchantsRepository implements IMerchantsRepository {
       data: merchantId,
     });
     const merchantUrl = `${env.OMNIPAY_SERVICE_URL}/merchants/${merchantId}`;
-    const  data  = await this.requestRepository.doGet(merchantUrl);
+    const data = await this.requestRepository.doGet(merchantUrl);
     const result = data?.result;
 
     return new Merchant({

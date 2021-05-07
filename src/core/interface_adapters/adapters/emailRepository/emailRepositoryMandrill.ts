@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { IEmail } from '@core/enterprise_business_rules/api_contract/iEmail';
 import { CoreErrorCodes } from '@core/enterprise_business_rules/constants';
 import { ServerError } from '@core/enterprise_business_rules/entities/errors';

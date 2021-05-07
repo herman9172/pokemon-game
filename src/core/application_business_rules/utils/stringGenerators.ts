@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 export class StringGenerators {
   static getRandomLetterId(length = 5): string {
     return Math.random()

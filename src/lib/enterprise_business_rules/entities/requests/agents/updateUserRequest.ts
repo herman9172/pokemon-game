@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { IUser } from '@lib/enterprise_business_rules/api_contract/users/iUser';
 import { IsBoolean, IsEmail, IsPhoneNumber, IsString } from 'class-validator';
 

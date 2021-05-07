@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { BaseError } from '@core/enterprise_business_rules/entities/errors';
 import { IInvoke } from '@core/interface_adapters/adapters/invokeRepository/invokeRepository';
 import { PreRegisterMerchant } from '@lib/application_business_rules/use_cases/merchants/preRegisterMerchant';

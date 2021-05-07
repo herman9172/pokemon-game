@@ -1,10 +1,11 @@
+// istanbul ignore file
+
 import { IDbRepository } from '@core/interface_adapters/adapters';
 import { ILogRepository } from '@core/interface_adapters/adapters/logRepository/iLogRepository';
 import { IUser } from '@lib/enterprise_business_rules/api_contract/users/iUser';
 import { IUsersRepository } from '@lib/interface_adapters/storage/users_repository/iUsersRepository';
 
 export class UsersRepository implements IUsersRepository {
-
   private static mapFullUserFromDB(dbResult: any): IUser {
     const userResult = dbResult[0][0];
     // const userRolesResult = dbResult[1];
@@ -53,9 +54,7 @@ export class UsersRepository implements IUsersRepository {
 
   async getUser(email: string): Promise<IUser> {
     this.logger.debug({ method: 'UsersRepository.getUser' });
-    const result = await this.dbRepository.query('CALL `sp_GetUser` (?);', [
-      email,
-    ]);
+    const result = await this.dbRepository.query('CALL `sp_GetUser` (?);', [email]);
 
     const user = UsersRepository.mapFullUserFromDB(result);
 

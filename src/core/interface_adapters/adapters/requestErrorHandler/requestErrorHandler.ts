@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { IRequest } from '@core/enterprise_business_rules/api_contract';
 import { CoreErrorCodes } from '@core/enterprise_business_rules/constants';
 import { BaseError, ServerError } from '@core/enterprise_business_rules/entities/errors';

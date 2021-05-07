@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { IRequest } from '@core/enterprise_business_rules/api_contract';
 import { ValidationError } from '@core/enterprise_business_rules/entities/errors';
 import { SearchUsers } from '@lib/application_business_rules/use_cases/superapp/searchUsers';

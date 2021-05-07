@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { CoreErrorCodes } from '@core/enterprise_business_rules/constants';
 import { ValidationError as SystemValidationError } from '@core/enterprise_business_rules/entities/errors/validationError';
 import { IRequestValidator } from '@core/interface_adapters/adapters/request_validator/iRequestValidator';

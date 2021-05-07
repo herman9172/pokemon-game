@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { CognitoAttributes } from '@core/enterprise_business_rules/constants/cognitoAttributes';
 import { IUser } from '@lib/enterprise_business_rules/api_contract/users/iUser';
 import { CognitoIdentityServiceProvider } from 'aws-sdk';

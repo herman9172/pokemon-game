@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 export enum merchantStatus {
   ACTIVE = 0,
   DISABLED = 1,

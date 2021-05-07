@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { TimeUtils } from '@core/application_business_rules/utils/timeUtils';
 import { IEmail } from '@core/enterprise_business_rules/api_contract/iEmail';
 import { BaseError } from '@core/enterprise_business_rules/entities/errors';

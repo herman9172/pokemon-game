@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 import { env } from '@config/env';
 import { CognitoUtils } from '@core/application_business_rules/utils/cognitoUtils';
 import { CognitoErrorCodes } from '@core/enterprise_business_rules/constants/errorCodes';
@@ -100,7 +102,6 @@ export class UserIdentityRepository implements IUserIdentityRepository {
     }).promise();
   } // end of toggleEnableCognitoUser
   async resendUserTemporaryPassword(user: IUser): Promise<IUser> {
-
     this.logger.debug({
       message: 'UserIdentityRepository:resendUserTemporaryPassword',
       data: user,

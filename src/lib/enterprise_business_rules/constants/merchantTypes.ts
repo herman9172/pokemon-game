@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 export enum merchantTypes {
   PERSONAL = 0,
   SMALL = 1,
