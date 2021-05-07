@@ -75,8 +75,9 @@ describe('it should test getPokemons use case', () => {
       offset: '2',
     };
 
+    const errorMessage = 'api error';
     jest.spyOn(mockServices.pokemonsRepository, 'getPokemons').mockImplementation(() => {
-      throw new Error('api error');
+      throw new Error(errorMessage);
     });
 
     const getPokemonsRequest = new GetPokemonsRequest(requestStub);
@@ -86,9 +87,8 @@ describe('it should test getPokemons use case', () => {
     try {
       await getPokemons.getPokemons(getPokemonsRequest);
     } catch (error) {
-      console.log({ error });
       expect(error).toBeInstanceOf(Error);
-      expect(requestRepositoryStub.doGet).toBeCalled();
+      expect(error.message).toBe(errorMessage);
     }
   });
 });
