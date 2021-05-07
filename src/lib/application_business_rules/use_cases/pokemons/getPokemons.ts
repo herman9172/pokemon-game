@@ -1,6 +1,5 @@
-import { GeneratePassword } from '@core/application_business_rules/use_cases/generatePassword';
 import { BaseError } from '@core/enterprise_business_rules/entities/errors';
-import { ILogRepository, IUserIdentityRepository } from '@core/interface_adapters/adapters';
+import { ILogRepository } from '@core/interface_adapters/adapters';
 import { GetPokemonsRequest } from '@lib/enterprise_business_rules/entities/requests';
 import { IPokemonsRepository } from '@lib/interface_adapters/storage';
 

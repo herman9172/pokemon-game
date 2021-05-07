@@ -1,4 +1,4 @@
-export interface iGetPokemonsRequest {
+export interface IGetPokemonsRequest {
   limit?: string;
   offset?: string;
 }

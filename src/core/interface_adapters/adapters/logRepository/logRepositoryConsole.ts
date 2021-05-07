@@ -18,16 +18,16 @@ export class LogRepositoryConsole implements ILogRepository {
     return LogRepositoryConsole.instance;
   }
 
-  constructor(private readonly requestId: string) {
-    this.logger = this.create();
-  }
-
-  public static getInstance(requestId: string): ILogRepository {
+  static getInstance(requestId: string): ILogRepository {
     if (!LogRepositoryConsole.instance) {
       LogRepositoryConsole.instance = new LogRepositoryConsole(requestId);
     }
 
     return LogRepositoryConsole.instance;
+  }
+
+  constructor(private readonly requestId: string) {
+    this.logger = this.create();
   }
 
   info(logEntity: ILog): void {

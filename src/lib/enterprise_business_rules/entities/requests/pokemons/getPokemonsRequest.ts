@@ -1,4 +1,4 @@
-import { iGetPokemonsRequest } from '@lib/enterprise_business_rules/api_contract/pokemons/iGetPokemonsRequest';
+import { IGetPokemonsRequest } from '@lib/enterprise_business_rules/api_contract/pokemons/iGetPokemonsRequest';
 import { IsString } from 'class-validator';
 
 export class GetPokemonsRequest {
@@ -8,12 +8,12 @@ export class GetPokemonsRequest {
   @IsString()
   protected readonly offset: string;
 
-  constructor(request: iGetPokemonsRequest) {
+  constructor(request: IGetPokemonsRequest) {
     this.limit = request.limit;
     this.offset = request.offset;
   }
 
-  serialize(): iGetPokemonsRequest {
+  serialize(): IGetPokemonsRequest {
     return {
       limit: this.limit,
       offset: this.offset,
