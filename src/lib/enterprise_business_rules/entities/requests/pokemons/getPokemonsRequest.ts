@@ -1,5 +1,5 @@
 import { IGetPokemonsRequest } from '@lib/enterprise_business_rules/api_contract/pokemons/iGetPokemonsRequest';
-import { IsNumberString, IsDefined, IsOptional } from 'class-validator';
+import { IsDefined, IsNumberString, IsOptional } from 'class-validator';
 
 export class GetPokemonsRequest {
   @IsDefined()
