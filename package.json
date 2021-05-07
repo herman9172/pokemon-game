@@ -8,7 +8,7 @@
     "sso-login": "aws sso login --profile dev",
     "db:migrate": "npx ts-node -r tsconfig-paths/register ./scripts/db/migration.config.ts",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
-    "local": "npm run aws-login && sls offline start -v --stage local --region us-east-1 --port 8201",
+    "local": "sls offline start -v --stage local --region us-east-1 --port 8201",
     "setup": "./scripts/setup.sh && npm install",
     "test": "jest --no-watchman --coverage --detectOpenHandles -c jest.config.js --colors --maxWorkers=4"
   },

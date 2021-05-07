@@ -27,12 +27,14 @@ import { IRequestValidator } from '@core/interface_adapters/adapters/request_val
 import { RequestValidator } from '@core/interface_adapters/adapters/request_validator/requestValidator';
 import {
   IMerchantsRepository,
+  IPokemonsRepository,
   ISuperappRepository,
   IUsersRepository,
   MerchantsRepository,
   SuperappRepository,
   UsersRepository,
 } from '@lib/interface_adapters/storage';
+import { PokemonsRepository } from '@lib/interface_adapters/storage/pokemons_repository/pokemonsRepository';
 import { APIGatewayProxyEvent, Context } from 'aws-lambda';
 
 export interface IServices {
@@ -51,6 +53,7 @@ export interface IServices {
   userIdentityRepository: IUserIdentityRepository;
   superappRepository: ISuperappRepository;
   sqsRepository: ISqsRepository;
+  pokemonsRepository: IPokemonsRepository;
 }
 
 export class App {
@@ -84,6 +87,7 @@ export class App {
       usersRepository: new UsersRepository(dbBackofficeRepository, this.logRepository),
       merchantRepository: new MerchantsRepository(requestRepository, this.logRepository),
       sqsRepository: new SqsRepository(this.logRepository),
+      pokemonsRepository: new PokemonsRepository(requestRepository, this.logRepository),
     };
   }
 

@@ -5,23 +5,22 @@
 # region USERS
 
 - http:
-    path: /users
-    method: post
-    # POST /users
-
-- http:
-    path: /users/{email}
-    method: put
-    # PUT /users
-
-- http:
-    path: /users/{email}
+    path: /pokemons
     method: get
-    # GET /users
+    # GET /pokemons
+# - http:
+#     path: /users/{email}
+#     method: put
+#     # PUT /users
 
-- http:
-    path: /users/{email}/resend
-    method: post
-    # POST /users/resend
+# - http:
+#     path: /users/{email}
+#     method: get
+#     # GET /users
+
+# - http:
+#     path: /users/{email}/resend
+#     method: post
+# POST /users/resend
 # endregion USERS
 
