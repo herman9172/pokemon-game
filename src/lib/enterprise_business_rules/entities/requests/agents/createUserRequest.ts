@@ -3,16 +3,16 @@ import { IsEmail, IsPhoneNumber, IsString } from 'class-validator';
 
 export class CreateUserRequest {
   @IsString()
-  protected readonly firstName: string;
+  readonly firstName: string;
 
   @IsString()
-  protected readonly lastName: string;
+  readonly lastName: string;
 
   @IsEmail()
-  protected email?: string;
+  email?: string;
 
   @IsPhoneNumber('ZZ')
-  protected phone?: string;
+  phone?: string;
 
   constructor(user: IUser) {
     this.firstName = user.firstName;
